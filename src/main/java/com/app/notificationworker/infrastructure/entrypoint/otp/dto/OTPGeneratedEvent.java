@@ -1,4 +1,4 @@
-package com.app.eventhandler.infrastructure.entrypoint.otp.dto;
+package com.app.notificationworker.infrastructure.entrypoint.otp.dto;
 
 public record OTPGeneratedEvent(
     String email,

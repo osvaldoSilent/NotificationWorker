@@ -1,4 +1,4 @@
-package com.app.eventhandler;
+package com.app.notificationworker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

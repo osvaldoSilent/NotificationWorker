@@ -1,11 +1,11 @@
-package com.app.eventhandler.infrastructure.entrypoint.otp;
+package com.app.notificationworker.infrastructure.entrypoint.otp;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import com.app.eventhandler.infrastructure.entrypoint.otp.dto.OTPGeneratedEvent;
+import com.app.notificationworker.infrastructure.entrypoint.otp.dto.OTPGeneratedEvent;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
