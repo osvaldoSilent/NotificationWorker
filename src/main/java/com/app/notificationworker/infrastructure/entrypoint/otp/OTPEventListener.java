@@ -6,6 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import com.app.notificationworker.infrastructure.entrypoint.otp.dto.OTPGeneratedEvent;
+import com.app.notificationworker.service.SmtpEmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
@@ -13,15 +14,19 @@ public class OTPEventListener {
 
     private static final Logger log = LoggerFactory.getLogger(OTPEventListener.class);
     private final ObjectMapper objectMapper;
+    private final SmtpEmailService smtpEmailService;
 
-    public OTPEventListener(ObjectMapper objectMapper) {
+    public OTPEventListener(ObjectMapper objectMapper, SmtpEmailService smtpEmailService) {
         this.objectMapper = objectMapper;
+        this.smtpEmailService = smtpEmailService;
     }
 
     @KafkaListener(
         topics = "auth.user.registered",
         groupId = "notification-group"
     )
+
+    @KafkaListener(topics = "auth.user.registered", groupId = "notification-group")
     public void handleOtpEvent(String eventRawJson) {
         try {
             // 1. Convertimos el String JSON a nuestro objeto Java
@@ -29,9 +34,12 @@ public class OTPEventListener {
             
             // ¡Ahora sí podemos usar las variables por separado!
             log.info("Evento procesado -> Correo: {}, Código OTP: {}", event.email(), event.otpCode());
-            
+            log.info("🎉 ¡MENSAJE RECIBIDO CON ÉXITO DESDE KAFKA!");
+            log.info("👤 Usuario ID / Name: {}", event.user_name()); // o el nombre de campo que tenga tu DTO
+            log.info("📧 Correo: {}", event.email());
+            log.info("🔑 Código OTP: {}", event.otpCode());
             // 2. Aquí llamaremos al servicio de correos
-            // emailService.sendOtpEmail(event.email(), event.otp());
+            smtpEmailService.sendOtpEmail(event.email(), event.otpCode());
 
         } catch (Exception e) {
             log.error("Error al procesar el mensaje de Kafka: {}", eventRawJson, e);
