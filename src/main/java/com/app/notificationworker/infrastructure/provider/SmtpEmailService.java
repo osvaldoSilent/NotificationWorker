@@ -5,9 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import com.app.notificationworker.port.EmailSenderPort;
 
 @Service
-public class SmtpEmailService {
+public class SmtpEmailService implements EmailSenderPort{
 
     private static final Logger log = LoggerFactory.getLogger(SmtpEmailService.class);
     private final JavaMailSender mailSender;
