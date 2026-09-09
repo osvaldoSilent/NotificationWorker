@@ -1,11 +1,12 @@
-package com.app.notificationworker.service;
+package com.app.notificationworker.infrastructure.provider;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import com.app.notificationworker.port.EmailSenderPort;
+
+import com.app.notificationworker.application.port.EmailSenderPort;
 
 @Service
 public class SmtpEmailService implements EmailSenderPort{
