@@ -20,7 +20,6 @@ public class Encryption {
     private static final int GCM_TAG_LENGTH = 128; // Autenticación de 128 bits
 
     private final SecretKey secretKey;
-    private final SecureRandom secureRandom = new SecureRandom();
 
     public Encryption(@Value("${app.security.encryption-secret-key}") String secretKeyBase64) {
         byte[] decodedKey = Base64.getDecoder().decode(secretKeyBase64);
