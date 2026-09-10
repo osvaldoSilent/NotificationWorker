@@ -21,7 +21,7 @@ public class SmtpEmailService implements EmailSenderPort{
     public void sendOtpEmail(String destinationEmail, String otpCode) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("tu_correo_de_prueba@gmail.com");
+            message.setFrom("onboarding@resend.dev");
             message.setTo(destinationEmail);
             message.setSubject("🔒 Tu código de verificación de cuenta");
             message.setText("Hola,\n\nTu código OTP para confirmar tu cuenta es: " + otpCode + 
